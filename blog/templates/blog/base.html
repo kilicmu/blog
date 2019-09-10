@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, 
+                                     initial-scale=1.0, 
+                                     maximum-scale=1.0, 
+                                     user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="{% static 'blog/css/reset.css' %}" type="text/css" rel="stylesheet">
+    <link type="text/css" href="{% static 'blog/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'blog/css/base.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'blog/css/middle.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'blog/css/header.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'blog/css/footer.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'blog/css/article.css' %}" rel="stylesheet">
+    <script type="text/css" href="{% static 'blog/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'blog/js/jquery-1.12.4.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'blog/js/select.js' %}" type="text/javascript"></script>
+    <script src="{% static 'blog/js/fix_header.js' %}" type="text/javascript"></script>
+    <script src="{% static 'blog/js/buttoms_ctl.js' %}" type="text/javascript"></script>
+    <script src="{% static 'blog/js/left_line_ctl.js' %}" type="text/javascript"></script>
+    <script src="{% static 'blog/js/myalert.js' %}" type="text/javascript"></script>
+    <!-- <script src="./js/adapt.js"></script> -->
+    <script type="text/javascript">
+        $(function () {
+            select_ctl();
+            zanshang_box_ctl();
+            set_select();
+            set_zanshang_box();
+            page_ctl();
+            to_top();
+            find_ctl();
+            show_type();
+            left_line_ctl();
+            $(".article a").addClass("super-link");
+            $(".article a").addClass("center");
+            $("#b_commit").click(function () {
+                var ser = window.location.search;
+                if(ser.split('=')[0]!= '?id'){
+                    alert('url参数错误');
+                    return;
+                }
+                var a_id = ser.split('=')[1];
+                
+                var $btn = $(this);
+                var $u_id = $("#c_name").val();
+                if($u_id == ""){
+                    $u_id = '匿名用户';
+                }
+                var $u_comment = $("#c_content").val();
+                if($u_comment == ""){
+                    myalert("内容不能为空");
+                    return;
+                }
+                var $url = window.location.href;
+                $.ajax({
+                    type: 'post',
+                    url: '/upload_comment/',
+                    datatype: 'json',
+                    data: {
+                        'a_id' : a_id,
+                        'u_id' : $u_id,
+                        'comment' : $u_comment
+                    },
+                    success: function (data) {
+                        if(data.status == 1){
+                            $(".comment").append('<div id="article_comments"><p id="user_id">'+data.u_id+':</p><span>'+data.u_comment+'</span><div id="c_time">评论于'+data.year+'年'+data.month+'月'+data.day+'日</div></div>')
+                            $("#c_content").val("");
+                    }else{
+                        myalert('评论失败');
+                        history.back();
+                    }
+                }
+                });
+            });
+        });
+    </script>
+    <title>hello</title>
+</head>
+
+<body class="coolscrollbar">
+    <div class="wrap clearfix">
+
+
+        <div class="header hidden-xs clearfix">
+            <div class="container">
+                <div class="contain_list clearfix">
+                    <div class="my fl">
+                        MY
+                    </div>
+                    <ul class="fl">
+                        <li class="tags"><a href="/">首页</a></li>
+                        <li class="dropdown" id="drop_list">
+                            <a href="#" onclick="return false">分类<span class="caret"></span></a></li>
+                        <li class="tags"><a href="/filte_by_time">最近</a></li>
+                        <li class="tags"><a href="#">记录</a></li>
+                        <li class="tags"><a href="#">资源</a></li>
+                        <li class="tags"><a href="#">关于</a></li>
+
+                    </ul>
+                    <ul class="fr">
+                        <li class="dropdown fr"><a href="#" onclick="return false">
+                                <div id="zanshang">赏</div>
+                            </a></li>
+                        <li class="dropdown fr"><a href="https://github.com/kilicmu">
+                                <div id="github"></div>
+                            </a></li>
+                        <li class="dropdown fr" id="find_li">
+                            <form action="#" method="POST"><input id="find" autocomplete="off" placeholder="本站搜索"><input
+                                    type="submit" id="find_img"></form>
+                        </li>
+                    </ul>
+
+                </div>
+
+
+                <div class="select_box">
+                    <ul>
+                        {% for i in filters %}
+                        <a href="/filte/{{i.id}}">
+                            <li>{{i.title}}</li>
+                        </a>
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+                <div class="zanshang_box">
+                    <div class="pic_box"></div>
+                </div>
+            </div>
+        </div>
+        <div class="left_line fl visible-xs">
+            <div id="message" class="visible-xs" style="cursor:pointer">
+                →
+            </div>
+
+            <img src="/media/{{root.pic}}" alt="touxiang">
+            <form action="#" method="POST"><input id="left_find" autocomplete="off" placeholder="本站搜索"></form>
+            <ul class="l_tag_l">
+                {% for i in filters %}
+                <a class="l_f" href="/filte/{{i.id}}">
+                    <li>{{i.title}}</li>
+                </a>
+                {% endfor %}
+                <a id="l_back" href="#" onclick="return false">
+                    <li>返回</li>
+                </a>
+            </ul>
+            <ul id="l_tags" class="fl">
+                <li class="l_tags"><a href="/">首页</a></li>
+                <li class="dropdown" id="type">
+                    <a href="#" onclick="return false">分类</a>
+
+                </li>
+                <li class="tags"><a href="/filte_by_time">最近</a></li>
+                <li class="l_tags"><a href="#">记录</a></li>
+                <li class="l_tags"><a href="#">资源</a></li>
+                <li class="l_tags"><a href="#">关于</a></li>
+
+            </ul>
+
+        </div>
+        <div id="body">
+
+            {% block baseblock %}
+
+            {% endblock %}
+
+            <div class="footer clearfix">
+                <p>kilic'blog</p>
+                <p>邮箱: kilicmu3389@outlook.com</p>
+            </div>
+        </div>
+        <div id="to_top" style="cursor:pointer">
+            ↑
+        </div>
+        <div id="alert"></div>
+    </div>
+    
+</body>
+
+</html>

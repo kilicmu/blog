@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% extends "blog/base.html" %}
+{% load static %}
+{% block baseblock %}
+<div class="header_pic" style="background-image: url('/media/{{pic.pwd}}')">
+    <div class="container" id="header_inner">
+        <div class="inner">
+            <p><a href="/media/{{pic.pwd}}" style="color:aliceblue;">{{pic.title}}</a></p>
+            <span>{{pic.content}}</span>
+        </div>
+    </div>
+</div>
+<div class="container clearfix" id="center">
+
+
+    <div class="row clearfix">
+
+        <div class="col-sm-12 col-md-10 col-lg-10 col-lg-offset-1 col-md-offset-1" id="center_line">
+            {% for i in articles %}
+            <div class="content_card clearfix">
+            
+                <div class="card clearfix" style="background-image:url('/media/{{i.pic}}')" onclick="window.open('/detail/?id={{i.article_id}}','_self')">
+
+                    <div class="title">
+                        <h3><a href="/detail/?id={{i.article_id}}">{{i.title}}</a></h3>
+                    </div>
+                    <div class="introduce">
+                        <p>{{i.year}}年{{i.month}}月{{i.day}}日</p>
+                        <p>{% for tag in i.tags %}·<a href="/filte/{{tag.id}}">{{tag.name}}</a>{% endfor %}</p>
+                    </div>
+
+                </div>
+
+            </div>
+            {% endfor %}
+
+
+            {% if has_prev == True %}
+            <a href="?p={{PIndex|add:-1}}"><button type="button" class="btn btn-default fl" id="prev">
+                    上一页
+                </button></a>
+            {% endif %}
+            {% if has_next == True %}
+            <a href="?p={{PIndex|add:1}}"><button type="button" class="btn btn-default fr" id="next">
+                    下一页
+                </button></a>
+            {% endif %}
+            
+        </div>
+    </div>
+
+</div>
+
+{% endblock baseblock %}

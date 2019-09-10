@@ -1,0 +1,171 @@
+.super-link{
+    position: relative;
+    text-decoration: none;
+    color: #000;
+}
+
+
+.super-link::after{
+    content: '';
+
+    width: 100%;
+    height: 1px;/*设置伪元素的高度，这里是下划线的粗细*/
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    background-color: currentColor;/*当前标签继承的文字颜色，这里让伪元素的背景色与父元素的文字颜色相同*/
+    transform: scale(0);
+    transition:all .35s;
+}
+.super-link:hover::after{
+    transform: scale(1);
+}
+.left::after{
+    transform-origin: left;
+}
+.right::after{
+    transform-origin: right;
+}
+.center::after{
+    transform-origin: center;
+}
+
+
+
+.article{
+    height: 100%;
+    width: 100%;
+    padding-top: 3rem;
+    
+    /* background-color: aqua; */
+}
+
+.article h2{
+    text-align: center;
+    color: aliceblue;
+    color: rgb(126, 126, 126);
+}
+
+.article a{
+    color:rgb(0, 107, 102);
+    text-decoration:none;
+}
+
+.article .type{
+    text-align: center;
+}
+
+#time{
+    text-align: right;
+    margin-top: 3rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    
+}
+
+.art_content{
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    color: rgb(207, 207, 207);
+}
+
+.art_content pre{
+    background-color: rgba(255, 255, 255, 0.822);
+    padding: 0.5rem;
+    border: none;
+}
+
+.comment{
+    margin-top: 10rem;
+    height: 100%;
+    width: 100%;
+    border: 2px solid rgb(0, 107, 102);
+    border-radius: 1.5rem;
+    padding: 1rem;
+    position: relative;
+    background-color: rgba(240, 248, 255, 0);
+}
+
+
+#comment_t{
+    margin-top: -5rem;
+    font-size: 3rem;
+
+
+}
+
+#c_name{
+    
+    border-radius: 1.5rem;
+    width: 70%;
+    height: 3rem;
+    margin-top: 1rem;
+    
+    padding-left: 1rem;
+    line-height: 3rem;
+    background-color: rgba(133, 133, 133, 0);
+    
+    border: 2px solid rgb(0, 107, 102);
+    display: inline;
+}
+
+
+#c_content{
+    display: block;
+    padding: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+    height: 10rem;
+    background-color: rgba(255, 255, 255, 0);
+    border: 2px solid rgb(0, 107, 102);
+    font-size: 2rem;
+    border-radius: 1.5rem;
+    
+}
+
+#b_commit{
+    margin-top: 1rem;
+    float: right;
+    display: inline;
+    width: 30%;
+    border-radius: 1.5rem;
+    color: aliceblue;
+    line-height: 3rem;
+    background-color: rgb(168, 159, 248);
+    border: 0;
+    text-align: center;
+}
+
+.detail_tag{
+    color: aliceblue;
+}
+.detail_tag:hover{
+    color: aliceblue;
+}
+
+#article_comments{
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    border-bottom: 1px solid rgb(0, 107, 102);
+}
+
+#user_id{
+    font-weight: bold;
+    width: 100%;
+    height: 100%; 
+}
+
+.comment span{
+    width:100%;
+    height: 100%;
+    
+}
+
+#c_time{
+    text-align: right;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 0.5rem;
+}

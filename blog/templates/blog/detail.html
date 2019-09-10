@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% extends "blog/base.html" %}
+{% load static %}
+{% block baseblock %}
+<div class="header_pic" style="background-image: url('/media/{{article.pic}}')">
+    <div class="container" id="header_inner">
+        <div class="inner">
+            <p><a href="#" style="color:aliceblue;">{{article.title}}</a></p>
+            <span>
+                {% for tag in article.tags %}
+                <a href="/filte/{{tag.id}}" class="detail_tag">分类:{{tag.title}}</a>
+                {% endfor %}
+            </span>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container clearfix" id="center">
+
+
+    <div class="row clearfix">
+
+        <div class="col-sm-12 col-md-10 col-lg-10 col-lg-offset-1 col-md-offset-1" id="center_line">
+
+            <!-- {block point} -->
+            <div class="article">
+                <p class="type"></p>
+                <div class="art_content">
+                    {{article.context | safe}}
+                    <p id="time">最后上传于: {{article.year}}年{{article.month}}月{{article.day}}日</p>
+
+                    <div class="comment">
+
+                        <p id="comment_t">评论</p>
+                        {% if article.comment|length == 0 %}
+                        <div>暂无评论{{comment|length}}</div>
+                        {% else %}
+                        {% for i in article.comment %}
+                        <div id="article_comments">
+                            <p id="user_id">{{i.user}}:</p>
+                            <span>{{i.content}}</span>
+                            <div id="c_time">评论于{{i.date.year}}年{{i.date.month}}月{{i.date.day}}日</div>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+
+                    </div>
+                    <div id="comment">
+                        <textarea placeholder="写下你的评论" id="c_content" maxlength="250"></textarea>
+                        <input maxlength="25" type="text" placeholder="你的名字/邮箱" id="c_name">
+                        <button id="b_commit" type="submit">提交</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock baseblock %}
