@@ -1,6 +1,6 @@
 # 一个基于Django的博客
 仅支持基本博客功能，没有任何扩展
-**ps:由于写的烂到辣眼睛，已经停止维护**
+**ps:由于写的烂到辣眼睛，早已经不继续写了**
 ## 预览
 ![预览图1](./blog/static/blog/imgs/show.png)
 ![预览图2](./blog/static/blog/imgs/show2.png)
