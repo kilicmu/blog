@@ -47,21 +47,21 @@ apt install procps
     vim uwsgi.ini
     ```
     2. 根据需求写入
-```
-[uwsgi]
-chdir = your_project_dir
-module = your_project.wsgi:application #此处的wsgi模块根据你的项目wsgi位置进行配置
-master = True
-processes = 4
-max-requests = 5000
-harakiri = 60
-socket = 127.0.0.1:8848			#设置监听端口
-daemonize =  your_project_dir/mysite.log	#设置log位置
-vacuum = True
-threads=2
-pidfile=uwsgi.pid
-```
-处理注释的地方, 其他的可以保持不变, 需要的话可以戳这里, 查看全部参数意义
+   ```
+   [uwsgi]
+   chdir = your_project_dir
+   module = your_project.wsgi:application #此处的wsgi模块根据你的项目wsgi位置进行配置
+   master = True
+   processes = 4
+   max-requests = 5000
+   harakiri = 60
+   socket = 127.0.0.1:8848			#设置监听端口
+   daemonize =  your_project_dir/mysite.log	#设置log位置
+   vacuum = True
+   threads=2
+   pidfile=uwsgi.pid
+   ```
+   处理注释的地方, 其他的可以保持不变, 需要的话可以戳这里, 查看全部参数意义
 6. 开启一下: 
 ```
 uwsgi --ini uwsgi.ini
