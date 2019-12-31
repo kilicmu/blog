@@ -1,11 +1,12 @@
 #coding=utf-8
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from .models import Article, Tags, Filter, User, Comments
 import re
 from . import handlelib
 import time
 import json
+import jieba
 
 # Create your views here.
 
@@ -99,4 +100,17 @@ def comment(request):
         return JsonResponse({"status": 0})
         
     return JsonResponse({"status": 1, "a_id": a_id, "u_id": u_id, "u_comment":u_conmment, "year":year, "month": month, "day":day})
+        
+
+def search(request):
+    try:
+        search_str = request.POST["search_value"]
+    except:
+        redirect(index)
+
+    search_arr = list(jieba.cut(search_str))
+    # handlelib.get_article_by_time
+    search_arr = [i for i in search_arr if len(i) != 1]
+    handlelib.get_article_by_word(search_arr)
+    return render(request, 'blog/index.html')
         

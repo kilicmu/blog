@@ -118,7 +118,7 @@
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    /* display: none; */
+    display: none;
 }
 
 
@@ -188,7 +188,7 @@
 
 #find {
     border-radius: 1.5rem;
-    width: 10rem;
+    width: 12rem;
     height: 3rem;
     margin-top: -0.5rem;
 

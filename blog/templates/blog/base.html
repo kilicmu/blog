@@ -76,6 +76,10 @@
                 }
                 });
             });
+            $(document).ready(function(){
+                
+                $(".header_pic").fadeIn(2000);
+            });
         });
     </script>
     <title>hello</title>
@@ -109,7 +113,7 @@
                                 <div id="github"></div>
                             </a></li>
                         <li class="dropdown fr" id="find_li">
-                            <form action="#" method="POST"><input id="find" autocomplete="off" placeholder="本站搜索"><input
+                            <form action="/search/" method="POST" ><input id="find" name="search_value" autocomplete="off" placeholder="本站搜索"><input
                                     type="submit" id="find_img"></form>
                         </li>
                     </ul>

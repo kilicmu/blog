@@ -80,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'new_blog',
         'USER': 'root',
-        'PASSWORD': 'jxsjmhw',
+        'PASSWORD': '123456',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
@@ -127,7 +127,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    
+
 ]
 
-MEDIA_ROOT=os.path.join(BASE_DIR, "blog/media/")
+MEDIA_ROOT = os.path.join(BASE_DIR, "blog/media/")

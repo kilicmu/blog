@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'filte/([0-9]*)/$', views.filte, name = 'details'),
     url(r'^filte_by_time/$', views.filte_by_time, name = 'filte_by_time'),
     url(r'upload_comment/$', views.comment, name ='comment'),
+    url(r'search/$', views.search, name='search'),
     # url(r'filte/(?P<id>[0-9]*)/p(?P<PIndex>[0-9]*)/$', views.filte, name = 'details'),
 ]
